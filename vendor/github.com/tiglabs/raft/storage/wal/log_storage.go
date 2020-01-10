@@ -162,7 +162,7 @@ func (ls *logEntryStorage) SaveEntries(ents []*proto.Entry) error {
 	}
 
 	// flush应用层内存中的，写入file
-	if err := ls.last.Flush(); err != nil {
+	if err := ls.last.Sync(); err != nil {
 		return err
 	}
 
