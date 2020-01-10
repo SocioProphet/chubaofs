@@ -66,7 +66,7 @@ type Partition interface {
 	// Truncate raft log
 	Truncate(index uint64)
 
-	TryToLeader(nodeID uint64) error
+	TryToLeader(partitionID uint64) error
 
 	IsOfflinePeer() bool
 }
@@ -97,8 +97,8 @@ func (p *partition) Stop() (err error) {
 	return
 }
 
-func (p *partition) TryToLeader(nodeID uint64) (err error) {
-	future := p.raft.TryToLeader(nodeID)
+func (p *partition) TryToLeader(partitionID uint64) (err error) {
+	future := p.raft.TryToLeader(partitionID)
 	_, err = future.Response()
 	return
 }
